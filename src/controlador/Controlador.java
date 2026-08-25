@@ -21,7 +21,7 @@ public class Controlador implements ActionListener {
         vistaPrincipal.setControlador(this);
         vistaAddTicket.setControlador(this);
 
-        vistaPrincipal.inicializar();
+        vistaPrincipal.inicializar(this.jornada);
     }
 
     @Override

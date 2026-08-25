@@ -7,6 +7,12 @@ package vistas;
 
 import controlador.Controlador;
 import interfaces.IVistaPrincipal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Jornada;
+import modelo.Ticket;
 
 /**
  *
@@ -178,13 +184,39 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVistaPrincipa
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void inicializar() {
-        this.setVisible(true);
+    public void inicializar(Jornada jornada) {
+        this.cargarTickets(jornada);
+        
+        this.jTextField1.setText(DateTimeFormatter.ISO_LOCAL_DATE.format(jornada.getFecha())); 
+        this.jTextField2.setText(String.valueOf(jornada.calcularTotal()));
+        
+        this.inicializar();
     }
 
     @Override
     public void setControlador(Controlador controlador) {
         this.jButton1.setActionCommand(BTN_VISTA_TICKET);
         this.jButton1.addActionListener(controlador);
+    }
+
+    @Override
+    public void cargarTickets(Jornada jornada) {
+        DefaultTableModel table = (DefaultTableModel) this.jTable1.getModel();
+        table.setRowCount(0); // Limpiamos la tabla
+        
+        for(Ticket t : jornada.getTickets()) {
+            Object[] rowData = new Object[4];
+            rowData[0] = t.getVehiculo().getPatente();
+            rowData[1] = DateTimeFormatter.ISO_LOCAL_TIME.format(t.getHoraIngreso());
+            rowData[2] = DateTimeFormatter.ISO_LOCAL_TIME.format(t.getHoraSalida());
+            rowData[3] = t.calcular();
+            
+            table.addRow(rowData);
+        }
+    }
+
+    @Override
+    public void inicializar() {
+        this.setVisible(true);
     }
 }
