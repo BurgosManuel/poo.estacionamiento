@@ -16,26 +16,19 @@ import java.util.logging.Logger;
  *
  * @author mburgos
  */
-public class Conexion {
+public class Conector {
     private final String username = "mburgos";
     private final String pass = "";
     private final String url = "jdbc:mariadb://localhost:3306/estacionamiento";
-    private Connection connection;
-    private Statement statement;
     
-    public void conectar() {
-        String driver = "org.mariadb.jdbc.Driver";
+    public Connection getConexion() {
         try {
-            Class.forName(driver);
-            this.connection = DriverManager.getConnection(url);
-            this.statement = connection.createStatement();
-            System.out.println("Conexion exitosa");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            // Class.forName("org.jdbc.mariadb.Driver"); (No es necesario si agregamos la libreria usando Netbeans)
+            return DriverManager.getConnection(url, username, pass);
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return null;
     }
     
 }
