@@ -8,7 +8,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,13 +21,18 @@ public class Conector {
     private final String url = "jdbc:mariadb://localhost:3306/estacionamiento";
     
     public Connection getConexion() {
+        Connection connection = null;
         try {
-            // Class.forName("org.jdbc.mariadb.Driver"); (No es necesario si agregamos la libreria usando Netbeans)
-            return DriverManager.getConnection(url, username, pass);
+            Class.forName("org.mariadb.jdbc.Driver");
+            connection = DriverManager.getConnection(url, username, pass);
+            System.out.println("Conexion exitosa.");
         } catch (SQLException ex) {
             Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        
+        return connection;
     }
     
 }

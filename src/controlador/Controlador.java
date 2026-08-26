@@ -22,6 +22,7 @@ public class Controlador implements ActionListener {
     private Conector conector = new Conector();
 
     public void inicializar() {
+        conector.getConexion();
         cargarDatosPrueba();
         
         vistaPrincipal.setControlador(this);
