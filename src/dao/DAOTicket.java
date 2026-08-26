@@ -5,10 +5,36 @@
  */
 package dao;
 
+import modelo.Jornada;
+
 /**
  *
  * @author mburgos
  */
 public class DAOTicket {
+    private Conector conector;
+    private Jornada jornada;
+    
+    public DAOTicket(Conector conector, Jornada jornada) {
+        this.conector = conector;
+        this.jornada = jornada;
+    };
+
+    public Conector getConector() {
+        return conector;
+    }
+
+    public void setConector(Conector conector) {
+        this.conector = conector;
+    }
+
+    public Jornada getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(Jornada jornada) {
+        this.jornada = jornada;
+    }
+    
     
 }

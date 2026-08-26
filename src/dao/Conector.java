@@ -19,9 +19,13 @@ public class Conector {
     private final String username = "mburgos";
     private final String pass = "";
     private final String url = "jdbc:mariadb://localhost:3306/estacionamiento";
+    private Connection connection;
     
     public Connection getConexion() {
-        Connection connection = null;
+        if(null != connection) {
+            return connection;
+        }
+        
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, pass);
