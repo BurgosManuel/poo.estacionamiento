@@ -199,17 +199,7 @@ public class VistaAddTicket extends javax.swing.JDialog implements IVistaAddTick
         String patente = this.jTextField1.getText();
         String tipoVehiculo = (String) this.jComboBox1.getSelectedItem();
         
-        switch(tipoVehiculo) {
-            case "MOTO":
-                t.setVehiculo(new Moto(patente));
-                break;
-            case "AUTO":
-                t.setVehiculo(new Auto(patente));
-                break;
-            case "CAMIONETA":
-                t.setVehiculo(new Camioneta(patente));
-                break;
-        }
+        t.setVehiculo(patente, tipoVehiculo);
         
         this.limpiar();
         

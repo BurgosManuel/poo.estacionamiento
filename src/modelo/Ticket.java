@@ -36,6 +36,20 @@ public class Ticket {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
+    
+    public void setVehiculo(String patente, String tipoVehiculo) {
+        switch(tipoVehiculo) {
+            case "MOTO":
+                setVehiculo(new Moto(patente));
+                break;
+            case "AUTO":
+                setVehiculo(new Auto(patente));
+                break;
+            case "CAMIONETA":
+                setVehiculo(new Camioneta(patente));
+                break;
+        }
+    }
 
     public LocalDateTime getHoraIngreso() {
         return horaIngreso;
