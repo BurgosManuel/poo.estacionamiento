@@ -1,5 +1,6 @@
 package controlador;
 
+import dao.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import interfaces.IVistaAddTicket;
@@ -18,8 +19,10 @@ public class Controlador implements ActionListener {
     private final Jornada jornada = new Jornada();
     private IVistaPrincipal vistaPrincipal = new VistaPrincipal();
     private IVistaAddTicket vistaAddTicket = new VistaAddTicket(null, true);
+    private Conexion conexion = new Conexion();
 
     public void inicializar() {
+        conexion.conectar();
         cargarDatosPrueba();
         
         vistaPrincipal.setControlador(this);
