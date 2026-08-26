@@ -7,6 +7,15 @@ package modelo;
 public class Vehiculo {
     private String patente;
     private double precioHora;
+    
+    public Vehiculo() {
+        
+    }
+    
+    public Vehiculo(String patente, double precioHora) {
+        this.patente = patente;
+        this.precioHora = precioHora;
+    }
 
     public String getPatente() {
         return patente;

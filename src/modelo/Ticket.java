@@ -12,6 +12,18 @@ public class Ticket {
     private LocalDateTime horaSalida;
     private int cantidadHoras;
     private double total;
+    
+    public Ticket() {
+        this.horaIngreso = LocalDateTime.now();
+    }
+    
+    public Ticket(Vehiculo v, int cantidadHoras) {
+        this.vehiculo = v;
+        this.horaIngreso = LocalDateTime.now();
+        this.cantidadHoras = cantidadHoras;
+        this.horaSalida = this.horaIngreso.plusHours(cantidadHoras);
+        this.total = this.calcular();
+    }
 
     public double calcular() {
         return this.cantidadHoras * vehiculo.getPrecioHora();
@@ -47,6 +59,9 @@ public class Ticket {
 
     public void setCantidadHoras(int cantidadHoras) {
         this.cantidadHoras = cantidadHoras;
+        if(null != this.horaIngreso) {
+         this.horaSalida = this.horaIngreso.plusHours(cantidadHoras); // Alineamos hora de salida y cant. horas   
+        }
     }
 
     public double getTotal() {
