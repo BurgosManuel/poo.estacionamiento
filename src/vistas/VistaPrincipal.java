@@ -203,7 +203,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVistaPrincipa
     public void cargarTickets(Jornada jornada) {
         DefaultTableModel table = (DefaultTableModel) this.jTable1.getModel();
         table.setRowCount(0); // Limpiamos la tabla
-        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm:ss");
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
         
         for(Ticket t : jornada.getTickets()) {
             Object[] rowData = new Object[4];

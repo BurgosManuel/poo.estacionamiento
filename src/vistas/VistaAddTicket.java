@@ -7,6 +7,10 @@ package vistas;
 
 import controlador.Controlador;
 import interfaces.IVistaAddTicket;
+import modelo.Auto;
+import modelo.Camioneta;
+import modelo.Moto;
+import modelo.Ticket;
 
 /**
  *
@@ -185,5 +189,36 @@ public class VistaAddTicket extends javax.swing.JDialog implements IVistaAddTick
     public void setControlador(Controlador controlador) {
         this.jButton1.setActionCommand(BTN_ADD_TICKET);
         this.jButton1.addActionListener(controlador);
+    }
+    
+    @Override
+    public Ticket agregarTicket() {
+        Ticket t = new Ticket();
+        t.setCantidadHoras(Integer.valueOf(this.jTextField2.getText()));
+        
+        String patente = this.jTextField1.getText();
+        String tipoVehiculo = (String) this.jComboBox1.getSelectedItem();
+        
+        switch(tipoVehiculo) {
+            case "MOTO":
+                t.setVehiculo(new Moto(patente));
+                break;
+            case "AUTO":
+                t.setVehiculo(new Auto(patente));
+                break;
+            case "CAMIONETA":
+                t.setVehiculo(new Camioneta(patente));
+                break;
+        }
+        
+        this.limpiar();
+        
+        return t;
+    }
+    
+    private void limpiar() {
+        this.jTextField1.setText("");
+        this.jTextField2.setText("");
+        this.jComboBox1.setSelectedIndex(0);
     }
 }

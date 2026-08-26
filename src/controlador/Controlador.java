@@ -30,7 +30,14 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(IVistaPrincipal.BTN_VISTA_TICKET.equalsIgnoreCase(e.getActionCommand())) {
+            vistaAddTicket.inicializar();
+        }
+        
+        if(IVistaAddTicket.BTN_ADD_TICKET.equalsIgnoreCase(e.getActionCommand())) {
+            this.jornada.agregar(vistaAddTicket.agregarTicket());
+            vistaPrincipal.cargarTickets(jornada);
+        }
     }
     
     private void cargarDatosPrueba(){
