@@ -24,8 +24,6 @@ public class Controlador implements ActionListener {
     private DAOTicket daoTicket = new DAOTicket(conector, jornada);
 
     public void inicializar() {
-        conector.getConexion();
-        //cargarDatosPrueba();
         daoTicket.cargarTickets();
         
         vistaPrincipal.setControlador(this);
@@ -41,7 +39,10 @@ public class Controlador implements ActionListener {
         }
         
         if(IVistaAddTicket.BTN_ADD_TICKET.equalsIgnoreCase(e.getActionCommand())) {
-            this.jornada.agregar(vistaAddTicket.agregarTicket());
+            Ticket nuevoTicket = vistaAddTicket.agregarTicket();
+            this.jornada.agregar(nuevoTicket);
+            this.daoTicket.agregarTicket(nuevoTicket);
+            
             vistaPrincipal.cargarTickets(jornada);
         }
     }

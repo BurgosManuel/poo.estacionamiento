@@ -22,10 +22,6 @@ public class Conector {
     private Connection connection;
     
     public Connection getConexion() {
-        if(null != connection) {
-            return connection;
-        }
-        
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, pass);
