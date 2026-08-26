@@ -187,7 +187,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVistaPrincipa
     public void inicializar(Jornada jornada) {
         this.cargarTickets(jornada);
         
-        this.jTextField1.setText(DateTimeFormatter.ISO_LOCAL_DATE.format(jornada.getFecha())); 
+        this.jTextField1.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(jornada.getFecha())); 
         this.jTextField2.setText(String.valueOf(jornada.calcularTotal()));
         
         this.inicializar();
@@ -203,13 +203,14 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVistaPrincipa
     public void cargarTickets(Jornada jornada) {
         DefaultTableModel table = (DefaultTableModel) this.jTable1.getModel();
         table.setRowCount(0); // Limpiamos la tabla
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm:ss");
         
         for(Ticket t : jornada.getTickets()) {
             Object[] rowData = new Object[4];
             rowData[0] = t.getVehiculo().getPatente();
-            rowData[1] = DateTimeFormatter.ISO_LOCAL_TIME.format(t.getHoraIngreso());
-            rowData[2] = DateTimeFormatter.ISO_LOCAL_TIME.format(t.getHoraSalida());
-            rowData[3] = t.calcular();
+            rowData[1] = formatoHora.format(t.getHoraIngreso());
+            rowData[2] = formatoHora.format(t.getHoraSalida());
+            rowData[3] = "$ " + String.valueOf(t.calcular());
             
             table.addRow(rowData);
         }
